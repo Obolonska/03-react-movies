@@ -34,11 +34,7 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
             placeholder="Search movies..."
             autoFocus
           />
-          <button
-            onClick={() => onSubmit()}
-            className={styles.button}
-            type="submit"
-          >
+          <button className={styles.button} type="submit">
             Search
           </button>
         </form>
