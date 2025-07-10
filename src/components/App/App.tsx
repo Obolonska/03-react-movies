@@ -30,8 +30,7 @@ export default function App() {
     setMovies([]);
     try {
       const data = await fetchMovies(query);
-      console.log(data);
-      console.log(data.length);
+
       if (data.length === 0) {
         toast.error("No movies found for your request.");
         return;
@@ -50,9 +49,9 @@ export default function App() {
         <MovieModal movie={selectedMovie} onClose={closeModal} />
       )}
       <SearchBar onSubmit={onSubmit} />
+      {movies.length > 0 && <MovieGrid onClick={openModal} movies={movies} />}
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
-      {movies.length > 0 && <MovieGrid onClick={openModal} movies={movies} />}
       <Toaster />
     </>
   );
