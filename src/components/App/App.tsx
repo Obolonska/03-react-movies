@@ -12,16 +12,14 @@ export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [selectedMovie, setSelectedMovie] = useState<Movie | null>(null);
 
   const openModal = (movie: Movie) => {
     setSelectedMovie(movie);
-    setIsModalOpen(true);
   };
   const closeModal = () => {
     setSelectedMovie(null);
-    setIsModalOpen(false);
   };
 
   const onSubmit = async (query: string) => {
@@ -45,13 +43,13 @@ export default function App() {
 
   return (
     <>
-      {isModalOpen && selectedMovie && (
+      {selectedMovie && (
         <MovieModal movie={selectedMovie} onClose={closeModal} />
       )}
       <SearchBar onSubmit={onSubmit} />
-      {movies.length > 0 && <MovieGrid onClick={openModal} movies={movies} />}
       {isLoading && <Loader />}
       {error && <ErrorMessage />}
+      {movies.length > 0 && <MovieGrid onSelect={openModal} movies={movies} />}
       <Toaster />
     </>
   );
